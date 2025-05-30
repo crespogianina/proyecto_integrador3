@@ -13,30 +13,42 @@ public class DomicilioServiceImpl implements GenericDAO<Domicilio> {
 
     @Override
     public void save(Domicilio domicilio) throws Exception {
-        if (domicilio.getCalle() == null) throw new IllegalArgumentException("La calle no puede ser nula");
-        if (domicilio.getNumero() == null) throw new IllegalArgumentException("La calle no puede ser nula");
+        if (domicilio.getCalle() == null)
+            throw new IllegalArgumentException("La calle no puede ser nula");
+        if (domicilio.getNumero() == null)
+            throw new IllegalArgumentException("El número no puede ser nulo");
 
         domicilioDAO.save(domicilio);
     }
 
     @Override
     public Domicilio findById(int id) throws Exception {
-        return null;
+        if (id <= 0)
+            throw new IllegalArgumentException("El id debe ser mayor que cero");
+        return domicilioDAO.findById(id);
     }
 
     @Override
     public List<Domicilio> findAll() throws Exception {
-        return List.of();
+        return domicilioDAO.findAll();
     }
 
     @Override
     public void update(Domicilio domicilio) throws Exception {
-        if (domicilio.getCalle() == null) throw new IllegalArgumentException("La calle no puede ser nula");
+        if (domicilio.getId() == null || domicilio.getId() <= 0)
+            throw new IllegalArgumentException("El id del domicilio es inválido");
+        if (domicilio.getCalle() == null)
+            throw new IllegalArgumentException("La calle no puede ser nula");
+        if (domicilio.getNumero() == null)
+            throw new IllegalArgumentException("El número no puede ser nulo");
 
+        domicilioDAO.update(domicilio);
     }
 
     @Override
     public void delete(int id) throws Exception {
-
+        if (id <= 0)
+            throw new IllegalArgumentException("El id debe ser mayor que cero");
+        domicilioDAO.delete(id);
     }
 }
