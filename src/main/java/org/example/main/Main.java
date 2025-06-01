@@ -38,15 +38,22 @@ public class Main {
 
             // Listar todas las personas
             List<Persona> personas = personaService.findAll();
-            System.out.println("\nListado de personas:");
-            for (Persona p : personas) {
-                System.out.println(p.getId() + ": " + p.getNombre() + ", Edad: " + p.getEdad());
+            if (personas != null && !personas.isEmpty()) {
+
+                System.out.println("\nListado de personas:");
+                for (Persona p : personas) {
+                    System.out.println(p.getId() + ": " + p.getNombre() + ", Edad: " + p.getEdad());
+                }
+            } else {
+                System.out.println("No se encontraron personas");
             }
 
-            // Actualizar persona (ejemplo: cambiar edad)
-            personaBuscada.setEdad(40);
-            personaService.update(personaBuscada);
-            System.out.println("\nPersona actualizada. Edad cambiada a: " + personaBuscada.getEdad());
+            if (personaBuscada != null) {
+                // Actualizar persona (ejemplo: cambiar edad)
+                personaBuscada.setEdad(40);
+                personaService.update(personaBuscada);
+                System.out.println("\nPersona actualizada. Edad cambiada a: " + personaBuscada.getEdad());
+            }
 
             // Listar nuevamente para ver el cambio
             personas = personaService.findAll();
@@ -56,8 +63,10 @@ public class Main {
             }
 
             // Borrar persona
-            personaService.delete(personaBuscada.getId());
-            System.out.println("\nPersona borrada con id: " + personaBuscada.getId());
+            if (personaBuscada != null) {
+                personaService.delete(personaBuscada.getId());
+                System.out.println("\nPersona borrada con id: " + personaBuscada.getId());
+            }
 
             // Listar para confirmar borrado
             personas = personaService.findAll();
@@ -67,7 +76,8 @@ public class Main {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Ocurrió un error:");
+            e.printStackTrace(System.out);
         }
 
     }

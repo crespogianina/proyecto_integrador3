@@ -6,14 +6,10 @@ public class Persona {
     private Domicilio domicilio;
     private Integer id;
 
-    public Persona(String homeroSimpson, int i, Domicilio dom1) {
-    }
-
     public Persona(String nombre, Integer edad) {
         this.nombre = nombre;
         this.edad = edad;
     }
-
 
     public Integer getEdad() {
         return edad;
