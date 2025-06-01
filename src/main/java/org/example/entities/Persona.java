@@ -6,9 +6,6 @@ public class Persona {
     private Domicilio domicilio;
     private Integer id;
 
-    public Persona() {
-    }
-
     public Persona(String nombre, Integer edad) {
         this.nombre = nombre;
         this.edad = edad;
@@ -44,5 +41,10 @@ public class Persona {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{id=" + id + ", nombre='" + nombre + "', edad=" + edad + ", domicilio=" + domicilio + "}";
     }
 }
