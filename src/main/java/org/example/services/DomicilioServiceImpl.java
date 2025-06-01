@@ -4,6 +4,7 @@ import org.example.dao.DomicilioDAOImpl;
 import org.example.dao.GenericDAO;
 import org.example.dao.PersonaDAOImpl;
 import org.example.entities.Domicilio;
+import org.example.entities.Persona;
 
 import java.util.List;
 
@@ -23,14 +24,24 @@ public class DomicilioServiceImpl implements GenericDAO<Domicilio> {
 
     @Override
     public Domicilio findById(int id) throws Exception {
-        if (id <= 0)
+        if (id <= 0) {
             throw new IllegalArgumentException("El id debe ser mayor que cero");
-        return domicilioDAO.findById(id);
+        }
+
+        Domicilio domicilio = domicilioDAO.findById(id);
+        if (domicilio == null) {
+            throw new Exception("No se encontró ningún domicilio con ID " + id);
+        }
+        return domicilio;
     }
 
     @Override
     public List<Domicilio> findAll() throws Exception {
-        return domicilioDAO.findAll();
+        List<Domicilio> domicilios = domicilioDAO.findAll();
+        if (domicilios == null || domicilios.isEmpty()) {
+            throw new Exception("No se encontraron domicilio");
+        }
+        return domicilios;
     }
 
     @Override
@@ -47,8 +58,14 @@ public class DomicilioServiceImpl implements GenericDAO<Domicilio> {
 
     @Override
     public void delete(int id) throws Exception {
-        if (id <= 0)
+        if (id <= 0) {
             throw new IllegalArgumentException("El id debe ser mayor que cero");
+        }
         domicilioDAO.delete(id);
+    }
+
+    public Domicilio saveAndReturnDomicilio(Domicilio domicilio) throws Exception {
+        save(domicilio);
+        return domicilio;
     }
 }
