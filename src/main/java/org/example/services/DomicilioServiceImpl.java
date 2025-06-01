@@ -2,9 +2,7 @@ package org.example.services;
 
 import org.example.dao.DomicilioDAOImpl;
 import org.example.dao.GenericDAO;
-import org.example.dao.PersonaDAOImpl;
 import org.example.entities.Domicilio;
-import org.example.entities.Persona;
 
 import java.util.List;
 
